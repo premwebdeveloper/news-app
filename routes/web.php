@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PostController;
+use App\Models\Post;
 
 Route::get('/', fn () => view('frontend.home'));
 
@@ -12,6 +15,16 @@ Route::get('/category/{slug}', function ($slug) {
 
 Route::get('/news/{slug}', function ($slug) {
     return view('frontend.news-detail');
+});
+
+Route::get('/news', function () {
+    $posts = Post::where('status','published')->latest()->get();
+    return view('frontend.news.index', compact('posts'));
+});
+
+Route::get('/news/{slug}', function ($slug) {
+    $post = Post::where('slug',$slug)->where('status','published')->firstOrFail();
+    return view('frontend.news.detail', compact('post'));
 });
 
 Route::get('/dashboard', function () {
@@ -27,6 +40,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth','admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', fn () => view('admin.dashboard'))->name('dashboard');
     Route::resource('users', UserController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('posts', PostController::class);
 });
 
 require __DIR__.'/auth.php';

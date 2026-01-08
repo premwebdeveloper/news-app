@@ -326,6 +326,38 @@ return [
             'icon' => 'fas fa-tachometer-alt',
         ],
         [
+            'text' => 'Categories',
+            'icon' => 'fas fa-tags',
+            'submenu' => [
+                [
+                    'text' => 'All Categories',
+                    'route' => 'admin.categories.index',
+                    'icon' => 'fas fa-list',
+                ],
+                [
+                    'text' => 'Add Category',
+                    'route' => 'admin.categories.create',
+                    'icon' => 'fas fa-plus',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Posts',
+            'icon' => 'fas fa-newspaper',
+            'submenu' => [
+                [
+                    'text' => 'All Posts',
+                    'route' => 'admin.posts.index',
+                    'icon' => 'fas fa-list',
+                ],
+                [
+                    'text' => 'Add Post',
+                    'route' => 'admin.posts.create',
+                    'icon' => 'fas fa-plus',
+                ],
+            ],
+        ],
+        [
             'text' => 'Users',
             'icon' => 'fas fa-users',
             'submenu' => [
@@ -451,7 +483,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
