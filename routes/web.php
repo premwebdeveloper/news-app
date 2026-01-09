@@ -1,8 +1,5 @@
 <?php
 
-dd('LIVE CODE HIT');
-
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
