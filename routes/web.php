@@ -20,11 +20,14 @@ use App\Http\Controllers\Admin\PostController;
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/category/{slug}', [FrontCategoryController::class, 'show'])
-    ->name('category.show');
+// Route::get('/category/{slug}', [FrontCategoryController::class, 'show'])
+//     ->name('category.show');
 
-Route::get('/news/{slug}', [NewsController::class, 'show'])
-    ->name('news.show');
+Route::get('/{category}', [FrontCategoryController::class, 'show'])
+    ->name('category.show')
+    ->where('category', '[a-z0-9\-]+');
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -61,3 +64,14 @@ Route::middleware(['auth', 'admin'])
 |--------------------------------------------------------------------------
 */
 require __DIR__.'/auth.php';
+
+
+// SEO Friendly News Detail URL
+// Is route ko file bilkul bottom me rakhna hai taake ye sabse last me match ho
+Route::get('/{category}/{slug}', [NewsController::class, 'show'])
+    ->name('news.show')
+    ->where([
+        'category' => '[a-z0-9\-]+',
+        'slug' => '[a-z0-9\-]+'
+    ]);
+

@@ -15,7 +15,10 @@
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-6 p-6 items-center">
 
         <!-- Image -->
-        <a href="{{ route('news.show', $heroPost->slug) }}">
+        <a href="{{ route('news.show', [
+                        'category' => $heroPost->category->slug,
+                        'slug' => $heroPost->slug
+                    ]) }}">
             <img
                 src="{{ $heroPost->image }}"
                 class="rounded-lg w-full h-[350px] object-cover"
@@ -36,7 +39,10 @@
                 {{ Str::limit(strip_tags($heroPost->content), 150) }}
             </p>
 
-            <a href="{{ route('news.show', $heroPost->slug) }}"
+            <a href="{{ route('news.show', [
+                        'category' => $heroPost->category->slug,
+                        'slug' => $heroPost->slug
+                    ]) }}"
                class="inline-block mt-4 text-red-600 font-semibold">
                 Read Full Story →
             </a>
@@ -57,7 +63,10 @@
         @foreach($posts->skip(1) as $post)
         <div class="bg-white rounded-lg shadow hover:shadow-lg transition">
 
-            <a href="{{ route('news.show', $post->slug) }}">
+            <a href="{{ route('news.show', [
+                        'category' => $post->category->slug,
+                        'slug' => $post->slug
+                    ]) }}">
                 <img
                     src="{{ $post->image }}"
                     class="rounded-t-lg h-48 w-full object-cover"
@@ -70,16 +79,23 @@
                 </span>
 
                 <h4 class="font-bold text-lg mt-2">
-                    <a href="{{ route('news.show', $post->slug) }}">
+                    <a href="{{ route('news.show', [
+                        'category' => $post->category->slug,
+                        'slug' => $post->slug
+                    ]) }}">
                         {{ $post->title }}
                     </a>
+
                 </h4>
 
                 <p class="text-gray-600 text-sm mt-2">
                     {{ Str::limit(strip_tags($post->content), 100) }}
                 </p>
 
-                <a href="{{ route('news.show', $post->slug) }}"
+                <a href="{{ route('news.show', [
+                        'category' => $post->category->slug,
+                        'slug' => $post->slug
+                    ]) }}"
                    class="text-red-600 mt-3 inline-block text-sm font-semibold">
                     Read More →
                 </a>

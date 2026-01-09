@@ -18,7 +18,10 @@
             @forelse($posts as $post)
                 <div class="bg-white rounded-lg shadow hover:shadow-lg transition">
 
-                    <a href="{{ route('news.show', $post->slug) }}">
+                    <a href="{{ route('news.show', [
+                            'category' => $category->slug,
+                            'slug' => $post->slug
+                        ]) }}">
                         <img
                             src="{{ $post->image }}"
                             alt="{{ $post->title }}"
@@ -32,7 +35,10 @@
                         </span>
 
                         <h3 class="font-bold text-lg mt-2">
-                            <a href="{{ route('news.show', $post->slug) }}">
+                            <a href="{{ route('news.show', [
+                                    'category' => $category->slug,
+                                    'slug' => $post->slug
+                                ]) }}">
                                 {{ $post->title }}
                             </a>
                         </h3>
@@ -41,7 +47,10 @@
                             {{ Str::limit(strip_tags($post->content), 100) }}
                         </p>
 
-                        <a href="{{ route('news.show', $post->slug) }}"
+                        <a href="{{ route('news.show', [
+                                'category' => $category->slug,
+                                'slug' => $post->slug
+                            ]) }}"
                            class="text-red-600 mt-3 inline-block text-sm font-semibold">
                             Read More →
                         </a>

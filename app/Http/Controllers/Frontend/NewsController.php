@@ -8,15 +8,18 @@ use App\Models\Category;
 
 class NewsController extends Controller
 {
-    public function show($slug)
+    public function show($category, $slug)
     {
         // Menu ke liye categories
         $categories = Category::where('status', 1)->get();
 
-        // Single post
+        // SEO-safe post fetch
         $post = Post::with(['category','seo'])
             ->where('slug', $slug)
             ->where('status', 'published')
+            ->whereHas('category', function ($q) use ($category) {
+                $q->where('slug', $category);
+            })
             ->firstOrFail();
 
         return view('frontend.news-detail', compact(

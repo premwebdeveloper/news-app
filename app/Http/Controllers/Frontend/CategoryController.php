@@ -8,13 +8,13 @@ use App\Models\Post;
 
 class CategoryController extends Controller
 {
-    public function show($slug)
+    public function show($categorySlug)
     {
         // Active categories (menu ke liye)
         $categories = Category::where('status', 1)->get();
 
         // Current category
-        $category = Category::where('slug', $slug)
+        $category = Category::where('slug', $categorySlug)
             ->where('status', 1)
             ->firstOrFail();
 
