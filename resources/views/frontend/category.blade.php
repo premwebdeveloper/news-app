@@ -1,26 +1,64 @@
 @extends('frontend.layouts.app')
 
-@section('title','Category News')
+@section('title', $category->name.' News')
 
 @section('content')
-<div class="max-w-7xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6 capitalize">
-        {{ $category ?? 'Category' }} News
-    </h1>
 
-    <div class="grid md:grid-cols-3 gap-6">
-        @for($i=1;$i<=6;$i++)
-        <div class="bg-white shadow rounded">
-            <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e"
-                 class="h-48 w-full object-cover rounded-t">
-            <div class="p-4">
-                <h3 class="font-bold">News Title {{ $i }}</h3>
-                <a href="/news/sample-news" class="text-red-600 text-sm mt-2 inline-block">
-                    Read More →
-                </a>
-            </div>
+<section class="bg-white py-6">
+    <div class="max-w-7xl mx-auto px-4">
+
+        {{-- Category Title --}}
+        <h1 class="text-3xl font-bold mb-6 border-l-4 border-red-600 pl-3">
+            {{ $category->name }}
+        </h1>
+
+        {{-- Posts Grid --}}
+        <div class="grid md:grid-cols-3 gap-6">
+
+            @forelse($posts as $post)
+                <div class="bg-white rounded-lg shadow hover:shadow-lg transition">
+
+                    <a href="{{ route('news.show', $post->slug) }}">
+                        <img
+                            src="{{ $post->image }}"
+                            alt="{{ $post->title }}"
+                            class="rounded-t-lg h-48 w-full object-cover"
+                        >
+                    </a>
+
+                    <div class="p-4">
+                        <span class="text-xs text-red-600 font-semibold">
+                            {{ $category->name }}
+                        </span>
+
+                        <h3 class="font-bold text-lg mt-2">
+                            <a href="{{ route('news.show', $post->slug) }}">
+                                {{ $post->title }}
+                            </a>
+                        </h3>
+
+                        <p class="text-gray-600 text-sm mt-2">
+                            {{ Str::limit(strip_tags($post->content), 100) }}
+                        </p>
+
+                        <a href="{{ route('news.show', $post->slug) }}"
+                           class="text-red-600 mt-3 inline-block text-sm font-semibold">
+                            Read More →
+                        </a>
+                    </div>
+                </div>
+            @empty
+                <p>No posts found in this category.</p>
+            @endforelse
+
         </div>
-        @endfor
+
+        {{-- Pagination --}}
+        <div class="mt-8">
+            {{ $posts->links() }}
+        </div>
+
     </div>
-</div>
+</section>
+
 @endsection

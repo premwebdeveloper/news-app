@@ -1,47 +1,63 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+
+// ================= FRONTEND CONTROLLERS =================
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\CategoryController as FrontCategoryController;
+use App\Http\Controllers\Frontend\NewsController;
+
+// ================= ADMIN CONTROLLERS ====================
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\PostController;
-use App\Models\Post;
 
-Route::get('/', fn () => view('frontend.home'));
+/*
+|--------------------------------------------------------------------------
+| Frontend Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/category/{slug}', function ($slug) {
-    return view('frontend.category', ['category' => $slug]);
-});
+Route::get('/category/{slug}', [FrontCategoryController::class, 'show'])
+    ->name('category.show');
 
-Route::get('/news/{slug}', function ($slug) {
-    return view('frontend.news-detail');
-});
+Route::get('/news/{slug}', [NewsController::class, 'show'])
+    ->name('news.show');
 
-Route::get('/news', function () {
-    $posts = Post::where('status','published')->latest()->get();
-    return view('frontend.news.index', compact('posts'));
-});
-
-Route::get('/news/{slug}', function ($slug) {
-    $post = Post::where('slug',$slug)->where('status','published')->firstOrFail();
-    return view('frontend.news.detail', compact('post'));
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+/*
+|--------------------------------------------------------------------------
+| Authenticated User Routes
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth','admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', fn () => view('admin.dashboard'))->name('dashboard');
-    Route::resource('users', UserController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('posts', PostController::class);
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::get('/dashboard', fn () => view('admin.dashboard'))
+            ->name('dashboard');
+
+        Route::resource('users', UserController::class);
+        Route::resource('categories', AdminCategoryController::class);
+        Route::resource('posts', PostController::class);
 });
 
+/*
+|--------------------------------------------------------------------------
+| Auth Routes (Laravel Breeze / Fortify)
+|--------------------------------------------------------------------------
+*/
 require __DIR__.'/auth.php';

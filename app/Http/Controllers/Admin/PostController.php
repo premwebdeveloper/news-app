@@ -38,7 +38,14 @@ class PostController extends Controller
                 ->store('posts','public');
         }
 
-        Post::create($data);
+        $post = Post::create($data);
+
+        // SEO save
+        $post->seo()->create([
+            'seo_title' => $request->seo_title,
+            'meta_description' => $request->meta_description,
+            'meta_keywords' => $request->meta_keywords,
+        ]);
 
         return redirect()->route('admin.posts.index')
             ->with('success','Post created');
@@ -61,6 +68,16 @@ class PostController extends Controller
         }
 
         $post->update($data);
+
+        // SEO update or create
+        $post->seo()->updateOrCreate(
+            [],
+            [
+                'seo_title' => $request->seo_title,
+                'meta_description' => $request->meta_description,
+                'meta_keywords' => $request->meta_keywords,
+            ]
+        );
 
         return redirect()->route('admin.posts.index')
             ->with('success','Post updated');

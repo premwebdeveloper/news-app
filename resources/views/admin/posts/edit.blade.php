@@ -101,6 +101,21 @@
                 </select>
             </div>
 
+            <input type="text"
+                name="seo_title"
+                value="{{ old('seo_title', optional($post->seo)->seo_title) }}"
+                class="form-control">
+
+            <textarea name="meta_description"
+                    class="form-control"
+                    rows="3">{{ old('meta_description', optional($post->seo)->meta_description) }}</textarea>
+
+            <input type="text"
+                name="meta_keywords"
+                value="{{ old('meta_keywords', optional($post->seo)->meta_keywords) }}"
+                class="form-control">
+
+
             <button class="btn btn-primary">
                 Update Post
             </button>
