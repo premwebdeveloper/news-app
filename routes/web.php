@@ -1,5 +1,8 @@
 <?php
 
+dd('ROUTES FILE HIT');
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
