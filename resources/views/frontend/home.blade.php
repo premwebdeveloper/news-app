@@ -58,8 +58,6 @@
         Latest News
     </h3>
 
-    <h1 style="color:red">LIVE TEST WORKING</h1>
-
     <div class="grid md:grid-cols-3 gap-6">
 
         @foreach($posts->skip(1) as $post)
