@@ -1,8 +1,5 @@
 <?php
 
-dd('ROUTES FILE HIT');
-
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -23,14 +20,26 @@ use App\Http\Controllers\Admin\PostController;
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Route::get('/category/{slug}', [FrontCategoryController::class, 'show'])
-//     ->name('category.show');
+/*
+|--------------------------------------------------------------------------
+| SEO Friendly News Detail URL (MUST COME FIRST)
+|--------------------------------------------------------------------------
+*/
+Route::get('/{category}/{slug}', [NewsController::class, 'show'])
+    ->name('news.show')
+    ->where([
+        'category' => '[a-z0-9\-]+',
+        'slug' => '[a-z0-9\-]+',
+    ]);
 
+/*
+|--------------------------------------------------------------------------
+| Category Page (ALWAYS AFTER news route)
+|--------------------------------------------------------------------------
+*/
 Route::get('/{category}', [FrontCategoryController::class, 'show'])
     ->name('category.show')
     ->where('category', '[a-z0-9\-]+');
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -53,9 +62,7 @@ Route::middleware(['auth', 'admin'])
     ->name('admin.')
     ->group(function () {
 
-        Route::get('/dashboard', fn () => view('admin.dashboard'))
-            ->name('dashboard');
-
+        Route::get('/dashboard', fn () => view('admin.dashboard'))->name('dashboard');
         Route::resource('users', UserController::class);
         Route::resource('categories', AdminCategoryController::class);
         Route::resource('posts', PostController::class);
@@ -63,18 +70,7 @@ Route::middleware(['auth', 'admin'])
 
 /*
 |--------------------------------------------------------------------------
-| Auth Routes (Laravel Breeze / Fortify)
+| Auth Routes
 |--------------------------------------------------------------------------
 */
 require __DIR__.'/auth.php';
-
-
-// SEO Friendly News Detail URL
-// Is route ko file bilkul bottom me rakhna hai taake ye sabse last me match ho
-Route::get('/{category}/{slug}', [NewsController::class, 'show'])
-    ->name('news.show')
-    ->where([
-        'category' => '[a-z0-9\-]+',
-        'slug' => '[a-z0-9\-]+'
-    ]);
-
