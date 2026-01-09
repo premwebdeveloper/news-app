@@ -31,4 +31,9 @@ jobs:
             composer install --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan optimize
+            php artisan route:clear
+            php artisan config:clear
+            php artisan view:clear
+            php artisan cache:clear
+            php artisan optimize
           EOF
