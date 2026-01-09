@@ -13,6 +13,11 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\PostController;
 
+Route::get('/__route-test', function () {
+    return 'ROUTE FILE LIVE';
+});
+
+
 /*
 |--------------------------------------------------------------------------
 | Frontend Routes
