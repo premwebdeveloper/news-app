@@ -25,12 +25,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 | SEO Friendly News Detail URL (MUST COME FIRST)
 |--------------------------------------------------------------------------
 */
-Route::get('/news/{category}/{slug}', [NewsController::class, 'show'])
+Route::get('/{category}/{slug}', [NewsController::class, 'show'])
+    ->name('news.show')
     ->where([
         'category' => '[a-z0-9\-]+',
         'slug' => '[a-z0-9\-]+',
-    ])
-    ->name('news.show');
+    ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +38,8 @@ Route::get('/news/{category}/{slug}', [NewsController::class, 'show'])
 |--------------------------------------------------------------------------
 */
 Route::get('/{category}', [FrontCategoryController::class, 'show'])
-    ->where('category', '[a-z0-9\-]+')
-    ->name('category.show');
+    ->name('category.show')
+    ->where('category', '[a-z0-9\-]+');
 
 /*
 |--------------------------------------------------------------------------
