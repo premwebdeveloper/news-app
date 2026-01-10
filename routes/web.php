@@ -22,24 +22,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /*
 |--------------------------------------------------------------------------
-| SEO Friendly News Detail URL (MUST COME FIRST)
+| Auth Routes (MUST COME BEFORE DYNAMIC ROUTES)
 |--------------------------------------------------------------------------
 */
-Route::get('/{category}/{slug}', [NewsController::class, 'show'])
-    ->name('news.show')
-    ->where([
-        'category' => '[a-z0-9\-]+',
-        'slug' => '[a-z0-9\-]+',
-    ]);
-
-/*
-|--------------------------------------------------------------------------
-| Category Page (ALWAYS AFTER news route)
-|--------------------------------------------------------------------------
-*/
-Route::get('/{category}', [FrontCategoryController::class, 'show'])
-    ->name('category.show')
-    ->where('category', '[a-z0-9\-]+');
+require __DIR__.'/auth.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +56,21 @@ Route::middleware(['auth', 'admin'])
 
 /*
 |--------------------------------------------------------------------------
-| Auth Routes
+| SEO Friendly News Detail URL
 |--------------------------------------------------------------------------
 */
-require __DIR__.'/auth.php';
+Route::get('/{category}/{slug}', [NewsController::class, 'show'])
+    ->name('news.show')
+    ->where([
+        'category' => '[a-z0-9\-]+',
+        'slug' => '[a-z0-9\-]+',
+    ]);
+
+/*
+|--------------------------------------------------------------------------
+| Category Page (ALWAYS LAST)
+|--------------------------------------------------------------------------
+*/
+Route::get('/{category}', [FrontCategoryController::class, 'show'])
+    ->name('category.show')
+    ->where('category', '[a-z0-9\-]+');
