@@ -3,8 +3,8 @@
 
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="flex items-center gap-2">
-            <span class="bg-red-600 text-white px-2 py-1 font-bold">NEWS</span>
-            <span class="font-bold text-xl">BLOG</span>
+            <span class="bg-red-600 text-white px-2 py-1 font-bold">Panchayat</span>
+            <span class="font-bold text-xl">365</span>
         </a>
 
         {{-- Dynamic Menu --}}
