@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Facades\Log;
 
 class ImportNews extends Command
 {
@@ -15,6 +16,8 @@ class ImportNews extends Command
 
     public function handle()
     {
+        Log::info('English scheduler triggered at '.now());
+
         $this->info('News import started at ' . now());
 
         $categories = Category::all();

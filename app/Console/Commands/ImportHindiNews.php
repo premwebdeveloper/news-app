@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Facades\Log;
 
 class ImportHindiNews extends Command
 {
@@ -15,6 +16,8 @@ class ImportHindiNews extends Command
 
     public function handle()
     {
+        Log::info('Hindi scheduler triggered at '.now());
+
         $this->info('Hindi News import started at ' . now());
 
         $categories = Category::all();
