@@ -14,6 +14,6 @@ Schedule::command('news:import')
     ->appendOutputTo(storage_path('logs/news-import.log'));
 
 Schedule::command('news:import-hindi')
-    ->everyMinute()
+    ->everySixHours()
     ->withoutOverlapping()
     ->appendOutputTo(storage_path('logs/news-hindi-import.log'));
