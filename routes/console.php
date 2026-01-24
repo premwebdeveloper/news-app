@@ -9,6 +9,6 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('news:import')
-    ->everyMinute()              // 4 times/day
+    ->everySixHours()              // 4 times/day
     ->withoutOverlapping()
     ->appendOutputTo(storage_path('logs/news-import.log'));
