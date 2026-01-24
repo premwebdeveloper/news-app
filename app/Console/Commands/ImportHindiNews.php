@@ -29,15 +29,9 @@ class ImportHindiNews extends Command
                 'topic'   => $category->slug, 
             ]);
 
-            // if (! $response->successful()) {
-            //     $this->error("API failed for: {$category->slug}");
-            //     continue;
-            // }
-
-            if (!$response->successful()) {
-                dump($response->status());
-                dump($response->body());
-                return;
+            if (! $response->successful()) {
+                $this->error("API failed for: {$category->slug}");
+                continue;
             }
 
             $articles = $response->json('articles');
