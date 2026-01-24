@@ -35,29 +35,29 @@ class PostSeeder extends Seeder
                     $title = $category->name." Breaking News ".$i;
                 }
 
-                Post::create([
-                    'category_id' => $category->id,
-                    'title' => $title,
-                    'slug' => Str::slug($title).'-'.uniqid(),
-                    'short_description' =>
-                        $catSlug === 'jobs'
-                        ? '<p><strong>Job Location:</strong> India | <strong>Experience:</strong> 0–3 Years</p>'
-                        : '<p>This is a short description for <strong>'.$title.'</strong>.</p>',
+                // Post::create([
+                //     'category_id' => $category->id,
+                //     'title' => $title,
+                //     'slug' => Str::slug($title).'-'.uniqid(),
+                //     'short_description' =>
+                //         $catSlug === 'jobs'
+                //         ? '<p><strong>Job Location:</strong> India | <strong>Experience:</strong> 0–3 Years</p>'
+                //         : '<p>This is a short description for <strong>'.$title.'</strong>.</p>',
 
-                    'content' =>
-                        $catSlug === 'jobs'
-                        ? '<p><strong>Job Description:</strong></p>
-                        <ul>
-                            <li>Good communication skills</li>
-                            <li>Relevant technical knowledge</li>
-                            <li>Freshers can apply</li>
-                        </ul>
-                        <p><strong>How to Apply:</strong> Apply online before last date.</p>'
-                        : '<p>This is full news content for <strong>'.$title.'</strong>.</p>',
+                //     'content' =>
+                //         $catSlug === 'jobs'
+                //         ? '<p><strong>Job Description:</strong></p>
+                //         <ul>
+                //             <li>Good communication skills</li>
+                //             <li>Relevant technical knowledge</li>
+                //             <li>Freshers can apply</li>
+                //         </ul>
+                //         <p><strong>How to Apply:</strong> Apply online before last date.</p>'
+                //         : '<p>This is full news content for <strong>'.$title.'</strong>.</p>',
 
-                    'image' => $image,
-                    'status' => 'published',
-                ]);
+                //     'image' => $image,
+                //     'status' => 'published',
+                // ]);
             }
         }
     }
