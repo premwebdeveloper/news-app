@@ -8,25 +8,25 @@ use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\Category;
 
-class ImportNews extends Command
+class ImportHindiNews extends Command
 {
-    protected $signature = 'news:import';
-    protected $description = 'Import latest news from API category wise';
+    protected $signature = 'news:import-hindi';
+    protected $description = 'Import Hindi news from GNews API (India)';
 
     public function handle()
     {
-        $this->info('News import started at ' . now());
+        $this->info('Hindi News import started at ' . now());
 
         $categories = Category::all();
 
         foreach ($categories as $category) {
 
-            $response = Http::timeout(30)->get(config('services.newsapi.url'), [
-                'apiKey'   => config('services.newsapi.key'),
-                'q'        => trim($category->slug),
-                'language' => 'en',
-                'sortBy'   => 'publishedAt',
-                'pageSize' => 20,
+            $response = Http::get(config('services.gnews.url'), [
+                'token'   => config('services.gnews.key'),
+                'country' => 'in',
+                'lang'    => 'hi',
+                'max'     => 10,
+                'topic'   => $category->slug, 
             ]);
 
             if (! $response->successful()) {
@@ -42,13 +42,17 @@ class ImportNews extends Command
 
             foreach ($articles as $article) {
 
-                if (empty($article['title']) || empty($article['urlToImage'])) {
+                if (empty($article['title']) || empty($article['image'])) {
                     continue;
                 }
 
                 $slug = Str::slug($article['title']);
 
                 // if (Post::where('slug', $slug)->exists()) {
+                //     continue;
+                // }
+
+                // if (Post::where('source_url', $article['url'])->exists()) {
                 //     continue;
                 // }
 
@@ -66,13 +70,13 @@ class ImportNews extends Command
                     'slug'              => $slug,
                     'short_description' => $article['description'] ?? null,
                     'content'           => $article['content'] ?? null,
-                    'image'             => $article['urlToImage'] ?? null,
-                    'source_url'        => $article['url'] ?? null,
+                    'image'             => $article['image'],
+                    'source_url' => $article['url'] ?? null,
                     'status'            => 'published',
                 ]);
             }
         }
 
-        $this->info('News import completed at ' . now());
+        $this->info('Hindi News import completed at ' . now());
     }
 }

@@ -17,6 +17,7 @@ class Post extends Model
         'short_description',
         'content',
         'image',
+        'source_url',
         'status',
     ];
 

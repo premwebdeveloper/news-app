@@ -41,6 +41,12 @@
             {!! $post->content !!}
         </article>
 
+        @if($post->source_url)
+            <a href="{{ $post->source_url }}" target="_blank" rel="nofollow noopener" class="btn btn-sm btn-info">
+                पूरा लेख पढ़ें →
+            </a>
+        @endif
+
     </div>
 </section>
 

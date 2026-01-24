@@ -8,7 +8,12 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('news:import')
-    ->everySixHours()              // 4 times/day
+// Schedule::command('news:import')
+//     ->everySixHours()              // 4 times/day
+//     ->withoutOverlapping()
+//     ->appendOutputTo(storage_path('logs/news-import.log'));
+
+Schedule::command('news:import-hindi')
+    ->everyMinute()
     ->withoutOverlapping()
-    ->appendOutputTo(storage_path('logs/news-import.log'));
+    ->appendOutputTo(storage_path('logs/news-hindi-import.log'));
