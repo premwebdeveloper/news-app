@@ -29,10 +29,16 @@ class ImportHindiNews extends Command
                 'topic'   => $category->slug, 
             ]);
 
-            if (! $response->successful()) {
+            if (!$response->successful()) {
                 $this->error("API failed for: {$category->slug}");
+                $this->error("Status: ".$response->status());
+                $this->error("Body: ".$response->body());
                 continue;
+            } else {
+                $this->info("API success for: {$category->slug}");
             }
+
+
 
             $articles = $response->json('articles');
 
