@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->text('source_url')->nullable()->after('image');
-            $table->index('source_url');
+            $table->string('source_url', 500)->nullable()->after('image');
         });
     }
 
@@ -23,7 +22,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropIndex(['source_url']);
             $table->dropColumn('source_url');
         });
     }
