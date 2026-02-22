@@ -13,6 +13,7 @@ Artisan::command('inspire', function () {
 //     ->withoutOverlapping()
 //     ->appendOutputTo(storage_path('logs/news-import.log'));
 
+
 // Schedule::command('news:import-hindi')
 //     ->everySixHours()
 //     ->withoutOverlapping()
