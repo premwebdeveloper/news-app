@@ -25,7 +25,7 @@ class PostController extends Controller
         }
 
         // Paginate to avoid loading thousands of rows into memory
-        $posts = $query->paginate(10)->withQueryString();
+        $posts = $query->paginate(50)->withQueryString();
 
         return view('admin.posts.index', [
             'posts' => $posts,
