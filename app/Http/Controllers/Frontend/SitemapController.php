@@ -33,13 +33,22 @@ class SitemapController extends Controller
             ];
         }
 
-        // All news posts (with a valid category)
+        // All news posts (only with valid slugs and categories)
         $posts = Post::with('category')
-            ->whereHas('category')
+            ->where('status', 'published')      // only published posts
+            ->whereNotNull('slug')              // must have a slug
+            ->whereHas('category', function ($q) {
+                $q->whereNotNull('slug');       // category must also have a slug
+            })
             ->orderByDesc('updated_at')
             ->get();
 
         foreach ($posts as $post) {
+            // Extra safety in case any record still has missing data
+            if (! $post->category || ! $post->slug || ! $post->category->slug) {
+                continue;
+            }
+
             $urls[] = [
                 'loc' => route('news.show', [
                     'category' => $post->category->slug,
