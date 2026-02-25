@@ -8,6 +8,8 @@
         
         <meta name="description" content="@yield('meta_description', 'Latest news and updates')">
 
+        <meta name="google-site-verification" content="merILrsnwhE7rICFXgH_zI0uRAmHJVVBpSC5niEG_q0" />
+
         <meta name="keywords" content="@yield('meta_keywords', 'news, jobs, updates')">
         @vite(['resources/css/app.css','resources/js/app.js'])
     </head>
