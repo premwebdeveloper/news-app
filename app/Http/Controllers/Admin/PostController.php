@@ -12,7 +12,11 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('category')->latest()->get();
+        // Paginate to avoid loading thousands of rows into memory
+        $posts = Post::with('category')
+            ->latest()
+            ->paginate(50);
+
         return view('admin.posts.index', compact('posts'));
     }
 

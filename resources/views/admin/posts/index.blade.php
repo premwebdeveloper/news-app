@@ -45,4 +45,9 @@
 		@endforeach
 	</tbody>
 </table>
+
+{{-- Laravel pagination links for large datasets --}}
+<div class="mt-3">
+	{{ $posts->links() }}
+</div>
 @endsection

@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>
-            @yield('seo_title', 'News Blog')
+            @yield('seo_title', 'Panchayat 365 – Latest Indian News, Jobs & Updates')
         </title>
         
-        <meta name="description" content="@yield('meta_description', 'Latest news and updates')">
+        <meta name="description" content="@yield('meta_description', 'Panchayat 365 is a dynamic news blog covering politics, jobs, entertainment, technology, sports and local updates with fresh stories from every category every day.')">
 
         <meta name="google-site-verification" content="merILrsnwhE7rICFXgH_zI0uRAmHJVVBpSC5niEG_q0" />
 
