@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CategoryController as FrontCategoryController;
 use App\Http\Controllers\Frontend\NewsController;
+use App\Http\Controllers\Frontend\SitemapController;
 
 // ================= ADMIN CONTROLLERS ====================
 use App\Http\Controllers\Admin\UserController;
@@ -19,6 +20,9 @@ use App\Http\Controllers\Admin\PostController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// XML Sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 /*
 |--------------------------------------------------------------------------

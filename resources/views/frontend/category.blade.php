@@ -4,28 +4,28 @@
 
 @section('content')
 
-<section class="bg-white py-6">
-    <div class="max-w-7xl mx-auto px-4">
+<section class="bg-white py-4">
+    <div class="container">
 
-        <h1 class="text-3xl font-bold mb-6 border-l-4 border-red-600 pl-3">
+        <h1 class="h3 fw-bold mb-4 border-start border-4 border-danger ps-3">
             {{ $category->name }}
         </h1>
 
         {{-- Posts Grid --}}
-        <div class="grid md:grid-cols-3 gap-6" id="post-container">
+        <div class="row g-4" id="post-container">
             @include('frontend.partials.category-posts')
         </div>
 
         {{-- Trigger Div --}}
-        <div id="load-trigger" class="h-10"></div>
+        <div id="load-trigger" style="height:40px;"></div>
 
         {{-- Loading --}}
-        <div id="loading" class="text-center mt-6 hidden">
+        <div id="loading" class="text-center mt-3 d-none">
             Loading more posts...
         </div>
 
         {{-- Hidden Pagination for SEO --}}
-        <div class="hidden">
+        <div class="d-none">
             {{ $posts->links() }}
         </div>
 
@@ -49,7 +49,7 @@
 
     function loadMore() {
         loading = true;
-        document.getElementById('loading').classList.remove('hidden');
+        document.getElementById('loading').classList.remove('d-none');
 
         fetch(`?page=${page}`, {
             headers: {
@@ -64,7 +64,7 @@
             page++;
             loading = false;
 
-            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('loading').classList.add('d-none');
         });
     }
 </script>

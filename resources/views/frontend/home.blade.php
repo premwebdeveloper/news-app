@@ -8,118 +8,130 @@
     $heroPost = $posts->first();
 @endphp
 
-<!-- Hero Section -->
-<!-- Hero Section -->
 @if($heroPost)
-<section class="bg-white">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-6 p-6 items-center">
+<section class="bg-white py-4">
+    <div class="container">
+        <div class="row g-4 align-items-center">
 
-        <!-- Image -->
-        <a href="{{ route('news.show', [
-                        'category' => $heroPost->category->slug,
-                        'slug' => $heroPost->slug
-                    ]) }}">
-            <img
-                src="{{ $heroPost->image }}"
-                class="rounded-lg w-full h-[350px] object-cover"
-                alt="{{ $heroPost->title }}">
-        </a>
+            <!-- Image -->
+            <div class="col-12 col-md-6">
+                <a href="{{ route('news.show', [
+                                'category' => $heroPost->category->slug,
+                                'slug' => $heroPost->slug
+                            ]) }}">
+                    <img
+                        src="{{ $heroPost->image }}"
+                        class="img-fluid rounded w-100"
+                        style="max-height:350px;object-fit:cover;"
+                        alt="{{ $heroPost->title }}"
+                        title="{{ $heroPost->title }}">
+                </a>
+            </div>
 
-        <!-- Content -->
-        <div>
-            <span class="bg-red-600 text-white px-3 py-1 text-sm rounded">
-                {{ $heroPost->category->name }}
-            </span>
+            <!-- Content -->
+            <div class="col-12 col-md-6">
+                <span class="badge bg-danger">
+                    {{ $heroPost->category->name }}
+                </span>
 
-            <h2 class="text-3xl font-bold mt-4 leading-tight">
-                {{ $heroPost->title }}
-            </h2>
+                {{-- Main page title (single H1) --}}
+                <h1 class="h2 fw-bold mt-3">
+                    {{ $heroPost->title }}
+                </h1>
 
-            <p class="text-gray-600 mt-3">
-                {{ Str::limit(strip_tags($heroPost->content), 150) }}
-            </p>
+                <p class="text-muted mt-2">
+                    {{ Str::limit(strip_tags($heroPost->content), 150) }}
+                </p>
 
-            <a href="{{ route('news.show', [
-                        'category' => $heroPost->category->slug,
-                        'slug' => $heroPost->slug
-                    ]) }}"
-               class="inline-block mt-4 text-red-600 font-semibold">
-                Read Full Story →
-            </a>
+                <a href="{{ route('news.show', [
+                            'category' => $heroPost->category->slug,
+                            'slug' => $heroPost->slug
+                        ]) }}"
+                   class="mt-3 d-inline-block text-danger fw-semibold text-decoration-none">
+                    Read Full Story →
+                </a>
+            </div>
+
         </div>
-
     </div>
 </section>
 @endif
 
 <!-- Latest News -->
-<section class="max-w-7xl mx-auto p-6">
-    <h3 class="text-2xl font-bold mb-6 border-l-4 border-red-600 pl-3">
-        Latest News
-    </h3>
+<section class="py-4">
+    <div class="container">
+        <h2 class="h3 fw-bold mb-4 border-start border-4 border-danger ps-3">
+            Latest News
+        </h2>
 
-    <div class="grid md:grid-cols-3 gap-6">
+        <div class="row g-4">
 
-        @foreach($posts->skip(1) as $post)
-        <div class="bg-white rounded-lg shadow hover:shadow-lg transition">
+            @foreach($posts->skip(1) as $post)
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card h-100 shadow-sm border-0">
 
-            <a href="{{ route('news.show', [
-                        'category' => $post->category->slug,
-                        'slug' => $post->slug
-                    ]) }}">
-                <img
-                    src="{{ $post->image }}"
-                    class="rounded-t-lg h-48 w-full object-cover"
-                    alt="{{ $post->title }}">
-            </a>
-
-            <div class="p-4">
-                <span class="text-xs text-red-600 font-semibold">
-                    {{ $post->category->name }}
-                </span>
-
-                <h4 class="font-bold text-lg mt-2">
                     <a href="{{ route('news.show', [
-                        'category' => $post->category->slug,
-                        'slug' => $post->slug
-                    ]) }}">
-                        {{ $post->title }}
+                                'category' => $post->category->slug,
+                                'slug' => $post->slug
+                            ]) }}">
+                        <img
+                            src="{{ $post->image }}"
+                            class="card-img-top"
+                            style="height:190px;object-fit:cover;"
+                            alt="{{ $post->title }}"
+                            title="{{ $post->title }}">
                     </a>
 
-                </h4>
+                    <div class="card-body">
+                        <span class="badge bg-light text-danger text-uppercase small mb-2">
+                            {{ $post->category->name }}
+                        </span>
 
-                <p class="text-gray-600 text-sm mt-2">
-                    {{ Str::limit(strip_tags($post->content), 100) }}
-                </p>
+                        <h3 class="h6 fw-bold">
+                            <a href="{{ route('news.show', [
+                                'category' => $post->category->slug,
+                                'slug' => $post->slug
+                            ]) }}" class="text-decoration-none text-dark">
+                                {{ $post->title }}
+                            </a>
+                        </h3>
 
-                <a href="{{ route('news.show', [
-                        'category' => $post->category->slug,
-                        'slug' => $post->slug
-                    ]) }}"
-                   class="text-red-600 mt-3 inline-block text-sm font-semibold">
-                    Read More →
-                </a>
+                        <p class="text-muted small mt-2 mb-3">
+                            {{ Str::limit(strip_tags($post->content), 100) }}
+                        </p>
+
+                        <a href="{{ route('news.show', [
+                                'category' => $post->category->slug,
+                                'slug' => $post->slug
+                            ]) }}"
+                           class="small fw-semibold text-danger text-decoration-none">
+                            Read More →
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-        @endforeach
+            @endforeach
 
+        </div>
     </div>
 </section>
 
 
 <!-- Categories -->
-<section class="bg-gray-100 py-10">
-    <div class="max-w-7xl mx-auto px-6">
-        <h3 class="text-2xl font-bold mb-6">
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="h3 fw-bold mb-4">
             Browse by Category
-        </h3>
+        </h2>
 
-        <div class="grid md:grid-cols-4 gap-4">
+        <div class="row g-3 row-cols-2 row-cols-sm-3 row-cols-md-4">
             @foreach($categories as $cat)
-            <a href="{{ route('category.show', $cat->slug) }}"
-               class="bg-white p-6 rounded shadow hover:bg-red-600 hover:text-white transition text-center font-semibold">
-                {{ $cat->name }}
-            </a>
+            <div class="col">
+                <a href="{{ route('category.show', $cat->slug) }}"
+                   class="d-block text-center fw-semibold text-decoration-none text-dark bg-white rounded shadow-sm py-3 px-2 h-100">
+                    {{ $cat->name }}
+                </a>
+            </div>
             @endforeach
         </div>
     </div>
