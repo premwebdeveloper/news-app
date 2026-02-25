@@ -1,11 +1,9 @@
 @extends('frontend.layouts.app')
 
-@section('title', $post->seo->meta_title ?? $post->title)
+{{-- Dynamic SEO for news detail: use post title for both --}}
+@section('seo_title', $post->title)
 
-@section('meta_description',
-    $post->seo->meta_description
-    ?? Str::limit(strip_tags($post->content), 150)
-)
+@section('meta_description', $post->title)
 
 @section('content')
 

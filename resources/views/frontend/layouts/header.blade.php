@@ -37,7 +37,7 @@
                 {{-- Auth Links --}}
                 <div class="d-flex align-items-center gap-2">
                     @auth
-                        <a href="/dashboard" class="small fw-semibold text-decoration-none">
+                        <a href="/admin/dashboard" class="small fw-semibold text-decoration-none">
                             Dashboard
                         </a>
                     @else

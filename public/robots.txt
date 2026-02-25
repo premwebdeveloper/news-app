@@ -1,10 +1,2 @@
 User-agent: *
-
-# Allow home page and single-segment category pages
-Allow: /
-
-# Disallow all two-level URLs (e.g. /category/slug -> news detail)
-Disallow: /*/*
-
-User-agent: *
-Disallow:
+Disallow: /

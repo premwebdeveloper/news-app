@@ -13,6 +13,9 @@
 
         <meta name="keywords" content="@yield('meta_keywords', 'news, jobs, updates')">
 
+        {{-- Canonical URL for SEO (defaults to current URL) --}}
+        <link rel="canonical" href="@yield('canonical', url()->current())">
+
         {{-- Bootstrap CSS --}}
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"

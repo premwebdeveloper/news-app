@@ -1,6 +1,8 @@
 @extends('frontend.layouts.app')
 
-@section('title', $category->name.' News')
+@section('seo_title', $category->name.' News – Panchayat 365')
+
+@section('meta_description', 'Latest '.$category->name.' news and updates from Panchayat 365 across jobs, politics, entertainment, technology and more.')
 
 @section('content')
 

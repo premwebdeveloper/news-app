@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title','Latest News')
+{{-- Home keeps the global default SEO title & description from layout --}}
 
 @section('content')
 
