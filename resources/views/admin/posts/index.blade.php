@@ -8,17 +8,40 @@
 <script>
 	$(function() {
 		$('#postsTable').DataTable({
-			paging: true,
-			searching: true,
+			// Use Laravel's paginator; disable DataTables paging UI
+			paging: false,
+			info: false,
+			// Searching is handled server-side via the form above
+			searching: false,
 			ordering: true,
 			responsive: true,
-			pageLength: 10
+			lengthChange: false
 		});
 	});
 </script>
 @endsection
 
 @section('content')
+<div class="mb-3">
+	<form method="GET" action="{{ route('admin.posts.index') }}" class="form-inline d-flex gap-2">
+		<input
+			type="text"
+			name="search"
+			value="{{ $search ?? '' }}"
+			class="form-control"
+			placeholder="Search in all posts..."
+		>
+		<button type="submit" class="btn btn-primary">
+			Search
+		</button>
+		@if(!empty($search))
+			<a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">
+				Clear
+			</a>
+		@endif
+	</form>
+</div>
+
 <table class="table table-bordered table-striped" id="postsTable">
 	<thead>
 		<tr>
@@ -46,8 +69,8 @@
 	</tbody>
 </table>
 
-{{-- Laravel pagination links for large datasets --}}
-<div class="mt-3">
-	{{ $posts->links() }}
+{{-- Laravel pagination links for large datasets (Bootstrap 5 style, centered in one row) --}}
+<div class="mt-3 d-flex justify-content-center">
+	{{ $posts->links('pagination::bootstrap-5') }}
 </div>
 @endsection
