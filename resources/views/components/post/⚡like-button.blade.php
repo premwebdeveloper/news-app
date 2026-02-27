@@ -28,7 +28,14 @@ new class extends Component
 
     public function toggle()
     {
-        if (!Auth::check()) return;
+        // if (!Auth::check()) return;
+        if (!Auth::check()) {
+            $this->dispatch('notify', 
+                type: 'error', 
+                message: 'Please login first to like this post.'
+            );
+            return;
+        }
 
         $like = Like::firstWhere([
             'post_id' => $this->postId,
