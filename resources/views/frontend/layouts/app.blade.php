@@ -24,10 +24,10 @@
             crossorigin="anonymous"
         >
 
+        @vite(['resources/css/app.css','resources/js/app.js'])
+
         {{-- Livewire Styles --}}
         @livewireStyles
-
-        @vite(['resources/css/app.css','resources/js/app.js'])
 
         <style>
             .collapse {
