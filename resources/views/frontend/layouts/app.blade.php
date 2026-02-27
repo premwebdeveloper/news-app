@@ -55,5 +55,26 @@
         {{-- Livewire Scripts --}}
         @livewireScripts
 
+        <script>
+            document.addEventListener('livewire:init', () => {
+                Livewire.on('notify', (data) => {
+
+                    const toast = document.createElement('div');
+                    toast.className = `
+                        position-fixed top-0 end-0 m-3
+                        alert alert-danger shadow
+                    `;
+                    toast.style.zIndex = 9999;
+                    toast.innerText = data.message;
+
+                    document.body.appendChild(toast);
+
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 3000);
+                });
+            });
+        </script>
+
     </body>
 </html>
