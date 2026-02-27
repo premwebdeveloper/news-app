@@ -24,7 +24,16 @@
             crossorigin="anonymous"
         >
 
+        {{-- Livewire Styles --}}
+        @livewireStyles
+
         @vite(['resources/css/app.css','resources/js/app.js'])
+
+        <style>
+            .collapse {
+                visibility: visible !important;
+            }
+        </style>
     </head>
     <body class="bg-light">
 
@@ -42,6 +51,9 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"
         ></script>
+
+        {{-- Livewire Scripts --}}
+        @livewireScripts
 
     </body>
 </html>

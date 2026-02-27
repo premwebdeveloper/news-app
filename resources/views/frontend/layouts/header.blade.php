@@ -35,20 +35,49 @@
                 </ul>
 
                 {{-- Auth Links --}}
-                <div class="d-flex align-items-center gap-2">
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                     @auth
-                        <a href="/admin/dashboard" class="small fw-semibold text-decoration-none">
-                            Dashboard
-                        </a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle small fw-semibold" href="#" id="userMenuDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ auth()->user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuDropdown">
+                                <li>
+                                    @if(auth()->user()->role === 'admin')
+                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                            Dashboard
+                                        </a>
+                                    @else
+                                        <a class="dropdown-item" href="{{ route('dashboard') }}">
+                                            Dashboard
+                                        </a>
+                                    @endif
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
                     @else
-                        <a href="/login" class="small fw-semibold text-decoration-none">
-                            Login
-                        </a>
-                        <a href="/register" class="btn btn-danger btn-sm">
-                            Register
-                        </a>
+                        <li class="nav-item me-2">
+                            <a href="{{ route('login') }}" class="nav-link small fw-semibold">
+                                Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('register') }}" class="btn btn-danger btn-sm">
+                                Register
+                            </a>
+                        </li>
                     @endauth
-                </div>
+                </ul>
             </div>
 
         </div>
