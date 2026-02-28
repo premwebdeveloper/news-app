@@ -7,6 +7,8 @@
 
 @section('content')
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
     .share-container {
         display: flex;
@@ -82,12 +84,11 @@
         {{-- Like + Share row (stacked on mobile, side‑by‑side on desktop) --}}
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mt-3">
             <!-- This is to show the like button -->
-            <div>
+            <div class="mt-6">
                 <livewire:post.like-button :post="$post" :key="$post->id" />
             </div>
 
-            <div>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+            <div class="mt-6">
 
                 <div class="share-container">
                     <a target="_blank"
@@ -116,6 +117,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="d-flex mt-3">
+            <div class="w-100">
+                <livewire:post.comments :post="$post" />
+            </div>
+        </div>
+
     </div>
 </section>
 
