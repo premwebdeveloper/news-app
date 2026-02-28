@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,10 +23,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('frontend.*', function ($view) {
-            $view->with(
-                'menuCategories',
-                Category::where('status', 1)->orderBy('name')->get()
-            );
+            $view->with([
+                'menuCategories' => Category::where('status', 1)->orderBy('name')->get(),
+                'breakingNews' => Post::with('category')
+                    ->where('breaking_news', true)
+                    ->latest()
+                    ->limit(5)
+                    ->get(),
+            ]);
         });
     }
 }

@@ -38,6 +38,7 @@
     <body class="bg-light">
 
         @include('frontend.layouts.header')
+        @include('frontend.partials.news-ticker')
 
         <main class="min-vh-100">
             @yield('content')

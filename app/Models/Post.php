@@ -21,6 +21,10 @@ class Post extends Model
         'status',
     ];
 
+    protected $casts = [
+        'breaking_news' => 'boolean',
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
