@@ -31,21 +31,21 @@ class HomeController extends Controller
         $sports = Post::with(['category','seo'])
             ->where(['status' => 'published', 'category_id' => 2])
             ->latest()
-            ->take(6)
+            ->take(8)
             ->get();
 
         // Get Technology news
         $technology = Post::with(['category','seo'])
             ->where(['status' => 'published', 'category_id' => 3])
             ->latest()
-            ->take(6)
+            ->take(8)
             ->get();
 
         // Get Entertainment news
         $entertainment = Post::with(['category','seo'])
             ->where(['status' => 'published', 'category_id' => 4])
             ->latest()
-            ->take(6)
+            ->take(8)
             ->get();
         
         // Get Business news
