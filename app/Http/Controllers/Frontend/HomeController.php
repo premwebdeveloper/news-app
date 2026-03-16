@@ -31,7 +31,7 @@ class HomeController extends Controller
         $sports = Post::with(['category','seo'])
             ->where(['status' => 'published', 'category_id' => 2])
             ->latest()
-            ->take(8)
+            ->take(9)
             ->get();
 
         // Get Technology news
@@ -45,7 +45,7 @@ class HomeController extends Controller
         $entertainment = Post::with(['category','seo'])
             ->where(['status' => 'published', 'category_id' => 4])
             ->latest()
-            ->take(8)
+            ->take(10)
             ->get();
         
         // Get Business news

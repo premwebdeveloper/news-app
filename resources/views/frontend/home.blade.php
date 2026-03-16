@@ -197,14 +197,14 @@
     </div>
 </section>
 
-{{-- Business News --}}
+{{-- Jobs News --}}
 <section class="py-4">
     <div class="container">
         <div class="row g-4">
 
             <div class="col-12 col-lg-12">
                 <h2 class="h3 fw-bold mb-4 border-start border-4 border-danger ps-3">
-                    Jobs News
+                    Latest Jobs
                 </h2>
 
                 <div class="row g-4">
