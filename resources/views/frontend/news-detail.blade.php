@@ -61,8 +61,8 @@
 
         {{-- Featured Image --}}
         @if($post->image)
-            <img
-                src="{{ $post->image }}"
+            <img 
+                src="{{ filter_var($post->image, FILTER_VALIDATE_URL) ? $post->image : asset('storage/'.$post->image) }}"
                 alt="{{ $post->title }}"
                 title="{{ $post->title }}"
                 class="img-fluid rounded mb-4 w-100"

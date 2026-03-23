@@ -4,7 +4,7 @@
 
             <a href="{{ route('news.show', ['category' => $post->category->slug, 'slug' => $post->slug]) }}">
                 <img
-                    src="{{ $post->image }}"
+                    src="{{ filter_var($post->image, FILTER_VALIDATE_URL) ? $post->image : asset('storage/'.$post->image) }}"
                     loading="lazy"
                     width="400"
                     height="250"
