@@ -26,7 +26,8 @@
             <div class="col-12 col-lg-6">
                 <a href="{{ route('news.show', ['category' => $heroPost->category->slug, 'slug' => $heroPost->slug]) }}" class="text-decoration-none">
                     <div class="hero-card position-relative overflow-hidden rounded">
-                        <img src="{{ $heroPost->image }}" alt="{{ $heroPost->title }}" title="{{ $heroPost->title }}" class="img-fluid w-100" style="height:450px;object-fit:cover;">
+                        <img src="{{ filter_var($heroPost->image, FILTER_VALIDATE_URL) ? $heroPost->image : asset('storage/'.$heroPost->image) }}" alt="{{ $heroPost->title }}" title="{{ $heroPost->title }}" class="img-fluid w-100" style="height:450px;object-fit:cover;">
+
                         <div class="hero-overlay position-absolute bottom-0 start-0 end-0 p-3 p-md-4 text-white" style="background:linear-gradient(transparent,rgba(0,0,0,0.85));">
                             <span class="badge bg-danger mb-2">{{ $heroPost->category->name }}</span>
                             <h1 class="h3 fw-bold mb-2 text-white">{{ $heroPost->title }}</h1>
@@ -44,7 +45,7 @@
                     <div class="col-6">
                         <a href="{{ route('news.show', ['category' => $post->category->slug, 'slug' => $post->slug]) }}" class="text-decoration-none d-block h-100">
                             <div class="hero-side-card position-relative overflow-hidden rounded h-100" style="min-height:218px;">
-                                <img src="{{ $post->image }}" alt="{{ $post->title }}" title="{{ $post->title }}" class="img-fluid w-100 h-100" style="object-fit:cover;">
+                                <img src="{{ filter_var($post->image, FILTER_VALIDATE_URL) ? $post->image : asset('storage/'.$post->image) }}" alt="{{ $post->title }}" title="{{ $post->title }}" class="img-fluid w-100 h-100" style="object-fit:cover;">
                                 <div class="position-absolute bottom-0 start-0 end-0 p-2 text-white small" style="background:linear-gradient(transparent,rgba(0,0,0,0.85));">
                                     <span class="badge bg-danger mb-1">{{ $post->category->name }}</span>
                                     <div class="fw-semibold text-white">{{ Str::limit($post->title, 45) }}</div>
@@ -76,7 +77,7 @@
                     <div class="col-12 col-sm-6 col-md-4">
                         <div class="card h-100 shadow-sm border-0">
                             <a href="{{ route('news.show', ['category' => $post->category->slug, 'slug' => $post->slug]) }}">
-                                <img src="{{ $post->image }}" class="card-img-top" style="height:190px;object-fit:cover;" alt="{{ $post->title }}" title="{{ $post->title }}">
+                                <img src="{{ filter_var($post->image, FILTER_VALIDATE_URL) ? $post->image : asset('storage/'.$post->image) }}" class="card-img-top" style="height:190px;object-fit:cover;" alt="{{ $post->title }}" title="{{ $post->title }}">
                             </a>
                             <div class="card-body">
                                 <span class="badge bg-light text-danger text-uppercase small mb-2">{{ $post->category->name }}</span>
@@ -100,7 +101,7 @@
                 <div class="d-flex flex-column gap-3">
                     @foreach($sports as $post)
                         <a href="{{ route('news.show', ['category' => $post->category->slug, 'slug' => $post->slug]) }}" class="d-flex gap-2 text-decoration-none text-dark">
-                            <img src="{{ $post->image }}" alt="{{ $post->title }}" title="{{ $post->title }}" class="rounded flex-shrink-0" style="width:90px;height:70px;object-fit:cover;">
+                            <img src="{{ filter_var($post->image, FILTER_VALIDATE_URL) ? $post->image : asset('storage/'.$post->image) }}" alt="{{ $post->title }}" title="{{ $post->title }}" class="rounded flex-shrink-0" style="width:90px;height:70px;object-fit:cover;">
 
                             <div>
                                 <span class="badge bg-danger badge-sm mb-1">{{ $post->category->name }}</span>
@@ -127,7 +128,7 @@
                 <div class="col-12 col-lg-12">
                     <a href="{{ route('news.show', ['category' => $business->category->slug, 'slug' => $business->slug]) }}" class="text-decoration-none">
                         <div class="hero-card position-relative overflow-hidden rounded">
-                            <img src="{{ $business->image }}" alt="{{ $business->title }}" title="{{ $business->title }}" class="img-fluid w-100" style="height:450px;object-fit:cover;">
+                            <img src="{{ filter_var($business->image, FILTER_VALIDATE_URL) ? $business->image : asset('storage/'.$business->image) }}" alt="{{ $business->title }}" title="{{ $business->title }}" class="img-fluid w-100" style="height:450px;object-fit:cover;">
                             <div class="hero-overlay position-absolute bottom-0 start-0 end-0 p-3 p-md-4 text-white" style="background:linear-gradient(transparent,rgba(0,0,0,0.85));">
                                 <span class="badge bg-danger mb-2">{{ $business->category->name }}</span>
                                 <h1 class="h3 fw-bold mb-2 text-white">{{ $business->title }}</h1>
@@ -158,7 +159,7 @@
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="card h-100 shadow-sm border-0">
                             <a href="{{ route('news.show', ['category' => $post->category->slug, 'slug' => $post->slug]) }}">
-                                <img src="{{ $post->image }}" class="card-img-top" style="height:190px;object-fit:cover;" alt="{{ $post->title }}" title="{{ $post->title }}">
+                                <img src="{{ filter_var($post->image, FILTER_VALIDATE_URL) ? $post->image : asset('storage/'.$post->image) }}" class="card-img-top" style="height:190px;object-fit:cover;" alt="{{ $post->title }}" title="{{ $post->title }}">
                             </a>
                             <div class="card-body">
                                 <span class="badge bg-light text-danger text-uppercase small mb-2">{{ $post->category->name }}</span>
@@ -182,7 +183,7 @@
                 <div class="d-flex flex-column gap-3">
                     @foreach($entertainment as $post)
                         <a href="{{ route('news.show', ['category' => $post->category->slug, 'slug' => $post->slug]) }}" class="d-flex gap-2 text-decoration-none text-dark">
-                            <img src="{{ $post->image }}" alt="{{ $post->title }}" title="{{ $post->title }}" class="rounded flex-shrink-0" style="width:90px;height:70px;object-fit:cover;">
+                            <img src="{{ filter_var($post->image, FILTER_VALIDATE_URL) ? $post->image : asset('storage/'.$post->image) }}" alt="{{ $post->title }}" title="{{ $post->title }}" class="rounded flex-shrink-0" style="width:90px;height:70px;object-fit:cover;">
 
                             <div>
                                 <span class="badge bg-danger badge-sm mb-1">{{ $post->category->name }}</span>
@@ -212,7 +213,7 @@
                         <div class="col-12 col-lg-6">
                             <a href="{{ route('news.show', ['category' => $post->category->slug, 'slug' => $post->slug]) }}" class="text-decoration-none">
                                 <div class="hero-card position-relative overflow-hidden rounded">
-                                    <img src="{{ $post->image }}" alt="{{ $post->title }}" title="{{ $post->title }}" class="img-fluid w-100" style="height:450px;object-fit:cover;">
+                                    <img src="{{ filter_var($post->image, FILTER_VALIDATE_URL) ? $post->image : asset('storage/'.$post->image) }}" alt="{{ $post->title }}" title="{{ $post->title }}" class="img-fluid w-100" style="height:450px;object-fit:cover;">
                                     <div class="hero-overlay position-absolute bottom-0 start-0 end-0 p-3 p-md-4 text-white" style="background:linear-gradient(transparent,rgba(0,0,0,0.85));">
                                         <span class="badge bg-danger mb-2">{{ $post->category->name }}</span>
                                         <h1 class="h3 fw-bold mb-2 text-white">{{ $post->title }}</h1>

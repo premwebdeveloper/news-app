@@ -10,17 +10,16 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
     <script>
+        let shortEditor, contentEditor;
+
         ClassicEditor
             .create(document.querySelector('#short_description'))
-            .catch(error => {
-                console.error(error);
-            });
+            .catch(error => { console.error(error); });
 
         ClassicEditor
             .create(document.querySelector('#content'))
-            .catch(error => {
-                console.error(error);
-            });
+            .catch(error => { console.error(error); });
+
     </script>
 @endsection
 
@@ -72,8 +71,7 @@
                 <textarea name="content"
                           id="content"
                           class="form-control"
-                          rows="6"
-                          required>{{ old('content') }}</textarea>
+                          rows="6">{{ old('content') }}</textarea>
             </div>
 
             {{-- Image --}}
@@ -91,7 +89,7 @@
                 </select>
             </div>
 
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" type="submit" >
                 Save Post
             </button>
 
